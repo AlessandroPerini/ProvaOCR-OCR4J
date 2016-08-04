@@ -10,6 +10,7 @@ import ee.ttu.ann.NeuralNetworkImpl;
 import ee.ttu.math.ActivationFunction;
 import ee.ttu.ocr.Eye;
 import ee.ttu.ocr.OCR;
+import ee.ttu.ocr.RandomReceptorEye;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -28,27 +29,7 @@ public class OCR4JExample {
     public static void main(String[] args) throws IOException {
         
         
-        Eye eye = new Eye() {
-            @Override
-            public float[] lookAt(BufferedImage image) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-
-            @Override
-            public int getReceptorsCount() {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-
-            @Override
-            public float getMaxReceptorValue() {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-
-            @Override
-            public float getMinReceptorValue() {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-        };
+        Eye eye = new RandomReceptorEye(0);
         
         ActivationFunction activationFunction = null;
         NeuralNetwork network = new NeuralNetworkImpl(activationFunction, 0);
@@ -58,8 +39,9 @@ public class OCR4JExample {
         /**
          * In demo/DemoApplet viene istanziato un OCR con il costruttore senza parametri.. new OCR();
          * Facendo così però durante l'esecuzione parte un'eccezione.
-         * Ho utilizzato il costruttore di OCR con i parametri ma non so come implementare Eye.
-         * Per NeuralNetwork invece c'è gia una implementazione NeuralNetworkImpl, ma non so come funziona.
+         * Ho utilizzato il costruttore di OCR con i parametri.
+         * Per NeuralNetwork e Eye uso le due implementazioni che ho trovato,
+         * NeuralNetworkImpl e RandomReceptorEye, ma non so come funzionano.
          * Così il file viene eseguito ma non da risultati.
          * 
         */
